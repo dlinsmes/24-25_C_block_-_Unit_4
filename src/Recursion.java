@@ -10,6 +10,30 @@ public class Recursion {
 
         System.out.println();
         countUpTo(10);
+        System.out.println();
+
+        System.out.println(fib(6));
+
+        for (int i = 1; i <= 10; i++)
+            System.out.print( fib(i) + " ");
+
+        System.out.println();
+
+        for (int i = 1; i <= 10; i++)
+            System.out.print( fibLoop(i) + " ");
+
+        System.out.println();
+
+        for (int i = 1; i <= 50; i++)
+            System.out.print( fibLoop(i) + " ");
+
+
+        //if one recursive method call requires multiple recursive calls, the run time grows exponentially
+        //-it can take a lot longer to run, even though the code is shorter than the looped version
+
+        System.out.println();
+        for (int i = 1; i <= 50; i++)
+            System.out.print( fib(i) + " ");
     }
 
     //warm up
@@ -112,9 +136,36 @@ public class Recursion {
     }
 
     //fibonacci numbers
-    //f(n) = f(n-2) + f(n-1)
+
     // 1 1 2 3 5 8 13 21
     //f(1) --> 1 -- base case
     //f(2) --> 1 -- base case
+    //f(3) --> 1 + 1 = 2
+    //        = f(1) + f(2)
+    //f(n) = f(n-2) + f(n-1)
+
+    public static int fib(int n) {
+        if (n == 1 || n == 2)
+            return 1;
+        else
+            //each method call in the recursive
+            //case needs the sum of two other
+            //method calls
+            return fib(n-2) + fib(n-1);
+    }
+
+
+    //same thing but with loop
+    public static int fibLoop(int n) {
+        int prev2 = 0;
+        int prev1 = 0;
+        int current = 1;
+        for (int i = 2; i <= n; i++) {
+            prev2 = prev1;
+            prev1 = current;
+            current = prev2 + prev1;
+        }
+        return current;
+    }
 
 }
